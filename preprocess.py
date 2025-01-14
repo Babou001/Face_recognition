@@ -37,11 +37,17 @@ def get_corpus():
         corpus.append(df['Description'][i])
     return corpus
 
+# to plot an image
 def plot_image(index):
     img = cv2.imread(df['Chemin_d_acces'][index])
     cv2.imshow('Image',img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    
+
+# to get the description of an image
+def get_description(index):
+    return df['Description'][index] 
 
 def get_tokenized_corpus():
     corpus = get_corpus()
@@ -50,6 +56,10 @@ def get_tokenized_corpus():
         tokenized_sentence = nltk.word_tokenize(sentence)
         tokenized_corpus.append(tokenized_sentence)
     return tokenized_corpus
+
+# to tokenize a sentence
+def tokenize(sentence):
+    return nltk.word_tokenize(sentence)
 
 
 
