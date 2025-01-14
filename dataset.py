@@ -2,7 +2,7 @@ import pandas as pd
 
 # Données avec des descriptions de la personnalité
 data = {
-    "Index": [i+1 for i in range(30)],
+    "Index": [i for i in range(30)],
     "Chemin_d_acces": [f"images/image{i+1}.jpg" for i in range(30)],
     "Description": [
         "Je suis Jean Dupont, j'ai 30 ans. Je suis une personne dynamique et sociable, toujours prête à relever de nouveaux défis.",
@@ -37,3 +37,6 @@ data = {
         "Je suis Sofia Rios, j'ai 36 ans. Je suis une personne positive et généreuse, toujours prête à soutenir mes amis et ma famille."
     ]
 }
+
+def get_data():
+    return pd.DataFrame(data)
