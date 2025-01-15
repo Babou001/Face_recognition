@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #071a2d;
+    background-color: #000000;
     color: white;
     padding: 1rem 0;
     text-align: center;
@@ -24,7 +24,7 @@ nav ul {
     margin: 0;
     display: flex;
     justify-content: center;
-    background-color: #000000;
+    background-color: #1f1f20;
     margin-top: 1rem;
 }
 
@@ -58,7 +58,7 @@ main {
 
 section h2 {
     font-size: 1.8rem;
-    color: #0073e6;
+    color: #11171e;
 }
 
 section p {
@@ -78,6 +78,9 @@ footer {
 footer p {
     margin: 0;
     font-size: 0.9rem;
+}
+a{
+color: #4e4f4f;
 }
 
 @media (max-width: 768px) {
