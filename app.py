@@ -1,17 +1,39 @@
 from flask import Flask, render_template, send_from_directory, request, redirect, url_for
+from search import inference, get_model
 import os
 import pandas as pd
+from dataset import get_data
+from image_search  import search_face
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+
+model = get_model()
+
+data = get_data()
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 data_file = os.path.join(current_dir, 'data.csv')
 images_dir = os.path.join(current_dir, 'images')
 app.config['UPLOAD_FOLDER'] = images_dir
 
-@app.route('/recherche')
-def recherche():
-    return render_template('recherche.html')
+@app.route('/recherche', methods=['GET'])
+def search():
+    search_description = request.args.get('search_description')
+    search_image = request.files.get('search_image')  # Pour l'instant non utilisé
+
+    results = {}
+    if search_description:
+        results = inference(search_description, model)
+
+    if search_image:
+        image_filename = secure_filename(search_image.filename)
+        image_path = os.path.join('static', 'uploads', image_filename)
+        search_image.save(image_path)
+        
+        # Recherche d'image dans le dataset
+        results = search_face(image_path)
+    return render_template('recherche.html', results=results)
 
 @app.route('/librairie', methods=['GET'])
 def librairie():
