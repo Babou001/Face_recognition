@@ -4,24 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliothèque d'Images</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <header>
         <h1>Bibliothèque d'Images</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="recherche.html">Rechercher un utilisateur</a></li>
-                <li><a href="librairie.html">Librairie</a></li>
+                <li><a href="recherche">Rechercher un utilisateur</a></li>
+                <li><a href="librairie">Librairie</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section>
-            <form id="imageForm">
+            <form action="/ajouter_image" method="POST" enctype="multipart/form-data">
                 <label for="image">Choisir une image :</label><br>
                 <input type="file" id="image" name="image" accept="image/*" required><br><br>
 
@@ -33,9 +31,16 @@
 
             <h2>Galerie d'Images</h2>
             <div class="gallery">
-            </div>            
+                {% for image, description in zip(images, descriptions) %}
+                    <div class="image-card">
+                        <a href="{{ url_for('get_image', filename=image.replace('images/', '')) }}" target="_blank">
+                            <img src="{{ url_for('get_image', filename=image.replace('images/', '')) }}" alt="Image {{ loop.index }}">
+                        </a>
+                        <p>{{ description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
         </section>
-        
     </main>
 </body>
 </html>
