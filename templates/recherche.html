@@ -30,6 +30,18 @@
                 <button type="submit">Rechercher</button>
             </form>
         </section>
+        <h2>Résultats de la Recherche</h2>
+    <ul>
+        {% for index, (score, description,image_path) in results.items() %}
+    <div>
+        <img src="{{ url_for('static', filename=image_path) }}" alt="Image {{ loop.index }}" style="width:150px;height:150px;">
+            
+        <p>Score : {{ score }}</p>
+        <p>Description : {{ description }}</p>
+    </div>
+{% endfor %}
+
+    </ul>
     </main>
 </body>
 <footer>
